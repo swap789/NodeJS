@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title><%= pageTitle %></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+
+<body>
+    <% include ../views/navigation.ejs %>
+    <main>
+        <h1>Admin Products</h1>
+        <ul>
+            <%prods.forEach(product=>{%>
+            <li>
+                Title: <%=product.title%> <br>
+                ImageUrl : <%=product.imageUrl%> <br>
+                Price : $<%=product.price%><br>
+                Description : <%=product.description%><br>
+            </li>
+            <%});%>
+        </ul>
+        <div>
+            <button>EDIT</button>
+            <form action="">
+                <button type="submit">DELETE</button>
+            </form>
+
+        </div>
+    </main>
+</body>
+
+</html>
