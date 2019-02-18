@@ -9,10 +9,15 @@ module.exports = class Product {
     }
 
     save() {
+        this.id = Math.random().toString();
         products.push(this);
     }
 
     static fetchAll() {
         return products;
+    }
+
+    static getProductById(productId) {
+        return products.find(product => product.id === productId);
     }
 }

@@ -3,9 +3,10 @@ const Product = require('../models/products');
 const products = [];
 
 exports.getAddProducts = (req, res, next) => {
-    res.render('admin/add-product', {
+    res.render('views/admin/edit-product', {
         pageTitle: 'Add Product',
-        path: '/admin/add-product'
+        path: '/admin/add-product',
+        editing: false,
     });
 }
 
@@ -21,10 +22,29 @@ exports.getPostProducts = (req, res, next) => {
     res.redirect('/');
 }
 
+exports.getEditProduct = (req, res, next) => {
+    const editMode = req.query.edit;
+    console.log(editMode);
+    if (!editMode) {
+        return res.redirect('/');
+    }
+    const prodId = req.params.productId;
+    const product = Product.getProductById(prodId);
+    if (!product) {
+        return res.redirect('/');
+    }
+    res.render('views/admin/edit-product', {
+        pageTitle: 'Edit Product',
+        path: '/admin/edit-product',
+        editing: editMode,
+        product: product
+    });
+}
+
 exports.getProducts = (req, res, next) => {
     const products = Product.fetchAll();
     console.log(products);
-    res.render('admin/products', {
+    res.render('views/admin/products', {
         prods: products,
         pageTitle: 'Admin Products',
         path: '/admin/products'
